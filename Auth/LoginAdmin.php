@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['nama_roles'] = $row['nama_roles'];
-        header("Location: ../test.php");
+        header("Location: ../dashboard.php");
         
         echo "<script>alert('LOGIN BERHASIL')</script>";
     } else {
