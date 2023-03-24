@@ -3,7 +3,7 @@ program kelola pencatatan susu sapi cv.mitra bhakti
 petugas => username = diki, password = 12345
 admin => username = admin, password = 12345
 
-testing
+Aku lagi nyoba nih
 
 catatan!!
 git pull lagi fren, terus ubah sesuai scope e kalian
