@@ -14,7 +14,12 @@
                         </div>
 
                     <!-- table  -->
-
+                    <div class="mt-4 align-items-right">
+                        <div class="text-end upgrade-btn">
+                            <a href="tambahPencatatan.php"
+                                class="btn btn-success d-none d-md-inline-block text-white">Add Data Baru <i class="fa-solid fa-plus"></i></a>
+                        </div>
+                    </div>
                     <div class="my-4">
                         <table id="example" class="table table-striped" style="width:100%">
                             <thead>
@@ -25,11 +30,12 @@
                                     <th>kandungan lemak</th>
                                     <th>jumlah</th>
                                     <th>harga susu</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $result = mysqli_query($conn, "SELECT ps.*,pe.* FROM pengumpulan_susu ps JOIN peternak pe ON ps.id");
+                                    $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu   ");
                                     
                                     while($data = mysqli_fetch_array($result)) {         
                                         echo "<tr>";
@@ -39,7 +45,8 @@
                                         echo "<td>".$data['kandungan_lemak']."</td>";    
                                         echo "<td>".$data['jumlah']."</td>";    
                                         echo "<td>".$data['harga_susu']."</td>";    
-                                        // echo "<td><a href='edit.php?id=$data[id]'>Edit</a> | <a href='delete.php?id=$data[id]'>Delete</a></td></tr>";        
+                                        echo "<td><a href='edit.php?id=$data[id_pengumpulan_susu]' class='btn btn-warning'><i class='fa-solid fa-pen-to-square'></i> Edit</a>
+                                        <a href='edit.php?id=$data[id_pengumpulan_susu]' class='btn btn-danger'><i class='fa-solid fa-xmark'></i> Delete</a></td></tr>";        
                                     }
                                 ?>
                             </tbody>
