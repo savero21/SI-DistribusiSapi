@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $sql);
         if ($result->num_rows > 0) {
             $row = mysqli_fetch_assoc($result);
-            $_SESSION['nama_pemilik'] = $row['nama_pemilik'];
+            $_SESSION['id_peternak'] = $row['id_peternak'];
             header("Location: ../dashboardPeternak.php");
             
             echo "<script>alert('LOGIN BERHASIL')</script>";}

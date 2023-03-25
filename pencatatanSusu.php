@@ -29,7 +29,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $result = mysqli_query($conn, "SELECT ps.*,pe.* FROM pengumpulan_susu ps JOIN peternak pe ON ps.id");
+                                    $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu");
                                     
                                     while($data = mysqli_fetch_array($result)) {         
                                         echo "<tr>";

@@ -2,7 +2,7 @@
  
 session_start();
  
-if (!isset($_SESSION['nama_pemilik'])) {
+if (!isset($_SESSION['id_peternak'])) {
     header("Location: ../Auth/LoginPage.php");
 }
  
@@ -78,7 +78,7 @@ if (!isset($_SESSION['nama_pemilik'])) {
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang, " . $_SESSION['nama_pemilik'] ."!". "</h4>"; ?>
+                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang, " . $_SESSION['id_peternak'] ."!". "</h4>"; ?>
                             <ul class="dropdown-menu show" aria-labelledby="navbarDropdown"></ul>
                         </li>
                     </ul>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['nama_pemilik'])) {
                                     class="hide-menu">Kelola Peternak</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="lihatTransaksiPeternak.php" aria-expanded="false">
+                                href="transaksiPeternak.php" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span
                                     class="hide-menu">Lihat Transaksi</span></a>
                         <li class="text-center p-20">
