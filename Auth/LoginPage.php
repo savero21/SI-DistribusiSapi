@@ -24,6 +24,18 @@ if (isset($_POST['submit'])) {
         header("Location: ../dashboard.php");
         
         echo "<script>alert('LOGIN BERHASIL')</script>";
+    } else if (isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $password = ($_POST['password']);
+     
+        $sql = "SELECT * FROM peternak WHERE peternak.username = '$username' AND peternak.password = '$password'";
+        $result = mysqli_query($conn, $sql);
+        if ($result->num_rows > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['nama_pemilik'] = $row['nama_pemilik'];
+            header("Location: ../dashboardPeternak.php");
+            
+            echo "<script>alert('LOGIN BERHASIL')</script>";}
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }
