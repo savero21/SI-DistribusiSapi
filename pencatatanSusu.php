@@ -29,7 +29,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu");
+                                    $result = mysqli_query($conn, "SELECT ps.*,pe.* FROM pengumpulan_susu ps JOIN peternak pe ON ps.id");
                                     
                                     while($data = mysqli_fetch_array($result)) {         
                                         echo "<tr>";
@@ -42,15 +42,6 @@
                                         // echo "<td><a href='edit.php?id=$data[id]'>Edit</a> | <a href='delete.php?id=$data[id]'>Delete</a></td></tr>";        
                                     }
                                 ?>
-                                
-                                <tr>
-                                    <td>Diki</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011-04-25</td>
-                                    <td>$320,800</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

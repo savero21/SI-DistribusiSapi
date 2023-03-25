@@ -88,7 +88,7 @@ if (!isset($_SESSION['nama_roles'])) {
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang, " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
+                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
                         </li>
                     </ul>
                 </div>
