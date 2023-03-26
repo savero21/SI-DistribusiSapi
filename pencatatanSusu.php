@@ -14,32 +14,42 @@
                         </div>
 
                     <!-- table  -->
-
+                    <div class="mt-4 align-items-right">
+                        <div class="text-end upgrade-btn">
+                            <a href="tambahPencatatan.php"
+                                class="btn btn-success d-none d-md-inline-block text-white">Add Data Baru <i class="fa-solid fa-plus"></i></a>
+                        </div>
+                    </div>
                     <div class="my-4">
                         <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>id pengumpulan susu</th>
-                                    <th>id peternak</th>
-                                    <th>id petugas pencatatan</th>
-                                    <th>kandungan lemak</th>
-                                    <th>jumlah</th>
-                                    <th>harga susu</th>
+                                    <th>No</th>
+                                    <th>Nama Petugas</th>
+                                    <th>Nama Peternak</th>
+                                    <th>Nama Peternakan</th>
+                                    <th>Kandungan Lemak</th>
+                                    <th>Jumlah</th>
+                                    <th>Harga Susu</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $result = mysqli_query($conn, "SELECT ps.*,pe.* FROM pengumpulan_susu ps JOIN peternak pe ON ps.id");
-                                    
+                                    $result = mysqli_query($conn, "SELECT ps.id_pengumpulan_susu,pet.nama,pe.nama_pemilik,pe.nama_peternakan,ps.kandungan_lemak, ps.jumlah,ps.harga_susu FROM pengumpulan_susu ps JOIN peternak pe ON pe.id_peternak = ps.id_peternak JOIN petugas pet ON pet.id_petugas = ps.id_petugas_pencatatan; ");
+                                    $number = 1;
                                     while($data = mysqli_fetch_array($result)) {         
                                         echo "<tr>";
-                                        echo "<td>".$data['id_pengumpulan_susu']."</td>";
-                                        echo "<td>".$data['id_peternak']."</td>";
-                                        echo "<td>".$data['id_petugas_pencatatan']."</td>";    
+                                        // echo "<td>".$data['id_pengumpulan_susu']."</td>";
+                                        echo "<td>".$number++."</td>";
+                                        echo "<td>".$data['nama']."</td>";
+                                        echo "<td>".$data['nama_pemilik']."</td>";    
+                                        echo "<td>".$data['nama_peternakan']."</td>";    
                                         echo "<td>".$data['kandungan_lemak']."</td>";    
                                         echo "<td>".$data['jumlah']."</td>";    
                                         echo "<td>".$data['harga_susu']."</td>";    
-                                        // echo "<td><a href='edit.php?id=$data[id]'>Edit</a> | <a href='delete.php?id=$data[id]'>Delete</a></td></tr>";        
+                                        echo "<td><a href='edit.php?id=$data[id_pengumpulan_susu]' class='btn btn-warning'><i class='fa-solid fa-pen-to-square'></i> Edit</a>
+                                        <a href='edit.php?id=$data[id_pengumpulan_susu]' class='btn btn-danger'><i class='fa-solid fa-xmark'></i> Delete</a></td></tr>";        
                                     }
                                 ?>
                             </tbody>
