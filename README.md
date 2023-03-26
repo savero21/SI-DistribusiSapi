@@ -1,7 +1,11 @@
-# SI-DistribusiSapi
+SI-DistribusiSapi
+
 program kelola pencatatan susu sapi cv.mitra bhakti 
-petugas => username = diki, password = 12345
-admin => username = admin, password = 12345
+ADMIN => username = admin, password = 12345
+PENCATATAN => username = catat, password = 12345
+SETOR => username = setor, password = 12345
+TRANSAKSI => username = transaksi, password = 12345
+PETERNAK => username = peternak, password = 12345
 
 catatan!!
 git pull lagi fren, terus ubah sesuai scope e kalian

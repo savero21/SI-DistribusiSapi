@@ -28,6 +28,12 @@ if (!isset($_SESSION['nama_roles'])) {
     <link href="assets/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+    <!-- style form css -->
+    <link rel="stylesheet" href="assets/css/button-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/path/to/select2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 </head>
 
 <body>
@@ -51,9 +57,6 @@ if (!isset($_SESSION['nama_roles'])) {
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo text -->
                         <span class="logo-text">
@@ -62,19 +65,13 @@ if (!isset($_SESSION['nama_roles'])) {
                         </span>
                     </a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav me-auto mt-md-0 ps-4">
                         <?php 
                             date_default_timezone_set('Asia/jakarta');
                             $time= time();
-                            $atime = date('Y/m/d',$time);
+                            $atime = date('Y-md',$time);
                             
                             echo "<h5 class='text-white bg-transparent'>" . $atime . "</h5><br>"; 
                         ?>
@@ -88,15 +85,12 @@ if (!isset($_SESSION['nama_roles'])) {
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang, " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
+                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -145,9 +139,6 @@ if (!isset($_SESSION['nama_roles'])) {
                             <a href="Logout.php" class="btn btn-danger text-white mt-4">Logout</a>
                         </li>
                     </ul>
-
-
-                    
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -156,6 +147,7 @@ if (!isset($_SESSION['nama_roles'])) {
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
+
     <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
