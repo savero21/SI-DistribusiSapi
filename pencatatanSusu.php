@@ -12,7 +12,7 @@
                         <div class="align-self-center">
                             <h3 class="page-title mb-0 p-0">Pencatatan Susu</h3>
                         </div>
-
+                    </div>
                     <!-- table  -->
                     <div class="mt-4 align-items-right">
                         <div class="text-end upgrade-btn">
