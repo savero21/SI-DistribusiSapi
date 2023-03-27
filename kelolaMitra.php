@@ -53,8 +53,8 @@
                         <div class="align-self-center d-flex gap-3">
                             <h3 class="page-title mb-0 p-0">Data Mitra</h3>
                             <?php if(!isset($_GET['add'])): ?>
-                                <a href="?add=true" class="btn btn-primary">
-                                    Tambah Data Mitra
+                                <a href="?add=true" class="btn btn-success">
+                                    Tambah Data Mitra +
                                 </a>
                             <?php endif?>
                         </div>

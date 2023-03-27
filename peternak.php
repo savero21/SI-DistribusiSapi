@@ -1,5 +1,5 @@
 <?php 
-    include 'sidebarnav.php';
+    include 'sidebarnavPeternak.php';
     include_once 'config.php';
 ?>
 

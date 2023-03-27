@@ -16,12 +16,14 @@ if (!isset($_SESSION['id_peternak'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Monster Lite Template by WrapPixel</title>
+    <title>Si-Sapi | Peternak</title>
 
     <!-- icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon.png">
-    <link rel="stylesheet" href="assets/css/icons/font-awesome/css/fontawesome.min.css">
-
+    <link rel="stylesheet" href="assets/css/icons/font-awesome/css/fontawesome.css">
+    <link href="assets/css/icons/font-awesome/css/brands.css" rel="stylesheet">
+    <link href="assets/css/icons/font-awesome/css/solid.css" rel="stylesheet">
+    
     <!-- Custom CSS -->
     <link href="assets/css/style.min.css" rel="stylesheet">
 </head>
@@ -47,9 +49,6 @@ if (!isset($_SESSION['id_peternak'])) {
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo text -->
                         <span class="logo-text">
@@ -58,16 +57,16 @@ if (!isset($_SESSION['id_peternak'])) {
                         </span>
                     </a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav me-auto mt-md-0 ps-4">
-                        <?php echo "<h5 class='text-white bg-transparent'>" . date("Y/m/d") . "</h5><br>"; ?>
+                        <?php 
+                            date_default_timezone_set('Asia/jakarta');
+                            $time= time();
+                            $atime = date('Y-md',$time);
+                            
+                            echo "<h5 class='text-white bg-transparent'>" . $atime . "</h5><br>"; 
+                        ?>
                     </ul>
 
                     <!-- ============================================================== -->
@@ -78,8 +77,7 @@ if (!isset($_SESSION['id_peternak'])) {
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang, " . $_SESSION['id_peternak'] ."!". "</h4>"; ?>
-                            <ul class="dropdown-menu show" aria-labelledby="navbarDropdown"></ul>
+                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_pemilik'] ."!". "</h4>"; ?>
                         </li>
                     </ul>
                 </div>

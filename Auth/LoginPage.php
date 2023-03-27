@@ -6,7 +6,7 @@ error_reporting(0);
  
 session_start();
  
-    if (isset($_SESSION['nama_roles'])) {
+    if (isset($_SESSION['username'])) {
         // header("Location: berhasil_login.php");
         echo "<script>alert('LOGIN BERHASIL')</script>";
     }
@@ -23,9 +23,9 @@ session_start();
             $_SESSION['nama_roles'] = $row['nama_roles'];
             $_SESSION['id_petugas'] = $row['id_petugas'];
             header("Location: ../dashboard.php");
-        } 
+         
     //login peternak
-    } else if (isset($_POST['submit'])) {
+        } else if (isset($_POST['submit'])) {
             $username = $_POST['username'];
             $password = ($_POST['password']);
         
@@ -34,13 +34,14 @@ session_start();
             if ($result->num_rows > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['id_peternak'] = $row['id_peternak'];
+                $_SESSION['nama_pemilik'] = $row['nama_pemilik'];
                 header("Location: ../dashboardPeternak.php");
                 
                 echo "<script>alert('LOGIN BERHASIL')</script>";}
-    } else {
-        echo "<script>alert('Username atau Password anda salah!')</script>";
+        } else {
+            echo "<script>alert('Username atau Password anda salah!')</script>";
+        }
     }
-
 ?>
 
 <!DOCTYPE html>

@@ -23,18 +23,18 @@
                         <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>id_Petugas</th>
+                                    <th>No</th>
                                     <th>Nama </th>
                                     <th>No Hp</th>
                                     <th>Alamat</th>
                                     <th>Username</th>
-                                    <th>Pasword</th>
-                                    <th>id_Role</th>
+                                    <th>Role</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $result = mysqli_query($conn, "SELECT pt.id_petugas,pt.nama,pt.no_hp,pt.alamat,pt.username,pt.password,pt.id_role FROM petugas pt;");
+                                    $result = mysqli_query($conn, "SELECT pt.id_petugas ,pt.nama,pt.no_hp,pt.alamat,pt.username, rl.nama_roles FROM petugas pt JOIN roles rl ON pt.id_role = rl.id_role;");
                                     $number = 1;
                                     while($data = mysqli_fetch_array($result)) {         
                                         echo "<tr>";
@@ -44,8 +44,7 @@
                                         echo "<td>".$data['no_hp']."</td>";    
                                         echo "<td>".$data['alamat']."</td>";
                                         echo "<td>".$data['username']."</td>";
-                                        echo "<td>".$data['password']."</td>";
-                                        echo "<td>".$data['id_role']."</td>";        
+                                        echo "<td>".$data['nama_roles']."</td>";        
                                         echo "<td><a href='edit.php?id=$data[id_petugas]' class='btn btn-warning'><i class='fa-solid fa-pen-to-square'></i> Edit</a>
                                         <a href='edit.php?id=$data[id_petugas]' class='btn btn-danger'><i class='fa-solid fa-xmark'></i> Delete</a></td></tr>";        
                                     }

@@ -2,7 +2,7 @@
  
 session_start();
  
-if (!isset($_SESSION['nama_roles'])) {
+if (!isset($_SESSION['id_petugas'])) {
     header("Location: ../Auth/LoginPage.php");
 }
  
@@ -71,7 +71,7 @@ if (!isset($_SESSION['nama_roles'])) {
                         <?php 
                             date_default_timezone_set('Asia/jakarta');
                             $time= time();
-                            $atime = date('Y-md',$time);
+                            $atime = date('Y-m-d',$time);
                             
                             echo "<h5 class='text-white bg-transparent'>" . $atime . "</h5><br>"; 
                         ?>
@@ -91,6 +91,9 @@ if (!isset($_SESSION['nama_roles'])) {
                 </div>
             </nav>
         </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -114,11 +117,11 @@ if (!isset($_SESSION['nama_roles'])) {
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="#" aria-expanded="false">
-                                <i class="me-3 fa fa-address-book   " aria-hidden="true"></i><span
+                                <i class="me-3 fa fa-address-book" aria-hidden="true"></i><span
                                     class="hide-menu">Kelola Peternak</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false">
+                                href="kelolamitra.php" aria-expanded="false">
                                 <i class="me-3 fa fa-truck" aria-hidden="true"></i><span
                                     class="hide-menu">Kelola Mitra</span></a>
                         </li>
@@ -147,6 +150,9 @@ if (!isset($_SESSION['nama_roles'])) {
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
+
+
+</html>
 
     <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->

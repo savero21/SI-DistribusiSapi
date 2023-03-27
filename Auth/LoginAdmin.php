@@ -6,8 +6,8 @@ error_reporting(0);
  
 session_start();
  
-if (isset($_SESSION['username'])) {
-    // header("Location: berhasil_login.php");
+if (isset($_SESSION['id_petugas'])) {
+    header("Location: berhasil_login.php");
 
     echo "<script>alert('LOGIN BERHASIL')</script>";
 }
@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
+        $_SESSION['id_petugas'] = $row['id_petugas'];
         $_SESSION['nama_roles'] = $row['nama_roles'];
         header("Location: ../dashboard.php");
         
