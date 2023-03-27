@@ -7,6 +7,8 @@ SETOR => username = setor, password = 12345
 TRANSAKSI => username = transaksi, password = 12345
 PETERNAK => username = peternak, password = 12345
 
+Aku lagi nyoba nih
+
 catatan!!
 git pull lagi fren, terus ubah sesuai scope e kalian
 

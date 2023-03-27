@@ -108,7 +108,7 @@ if (!isset($_SESSION['nama_roles'])) {
                                 href="dashboard.php" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false">
+                                href="kelolaPetugas.php" aria-expanded="false">
                                 <i class="me-3 fa fa-users" aria-hidden="true"></i><span
                                     class="hide-menu">Kelola Petugas</span></a>
                         </li>
@@ -130,7 +130,7 @@ if (!isset($_SESSION['nama_roles'])) {
                                 href="pencatatanSusu.php" aria-expanded="false"><i class="me-3 fa fa-filter"
                                     aria-hidden="true"></i><span class="hide-menu">Pencatatan Susu</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="me-3 fa fa-home"
+                                href="kelolaGudang.php" aria-expanded="false"><i class="me-3 fa fa-home"
                                     aria-hidden="true"></i><span class="hide-menu">Gudang Susu</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="map-google.html" aria-expanded="false"><i class="me-3 fa fa-credit-card-alt "
