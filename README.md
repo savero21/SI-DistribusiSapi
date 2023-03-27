@@ -1,18 +1,23 @@
 SI-DistribusiSapi
 
 program kelola pencatatan susu sapi cv.mitra bhakti 
+
 ADMIN => username = admin, password = 12345
+
 PENCATATAN => username = catat, password = 12345
+
 SETOR => username = setor, password = 12345
+
 TRANSAKSI => username = transaksi, password = 12345
+
 PETERNAK => username = peternak, password = 12345
 
-Aku lagi nyoba nih
-
 catatan!!
-git pull lagi fren, terus ubah sesuai scope e kalian
+git async dulu terus pull lagi fren, terus update sesuai scope e kalian dibawah
 
-sementara scope gini
+
+
+Pembagian Scope dibawah sini! 
 
 design database (muh daffa)
 document skpl, manual book, document pengujian (selly amel)
