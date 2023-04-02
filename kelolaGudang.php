@@ -1,5 +1,5 @@
 <?php 
-    include 'sidebarnav.php';
+    require_once('sidebarnav.php');
     include_once 'config.php';
 ?>
 <!-- Page wrapper  -->
@@ -53,20 +53,7 @@
                 </div>        
             </div>
 
-        
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                © <?= date('Y') ?> by Workshop
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-    <!-- ============================================================== -->
-<!-- End Wrapper -->
-
+         <?php require_once('sidebarnav.php') ?>   
 <script>
     $(document).ready(function () {
     $('#example').DataTable();

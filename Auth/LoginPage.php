@@ -35,6 +35,7 @@ session_start();
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['id_peternak'] = $row['id_peternak'];
                 $_SESSION['nama_pemilik'] = $row['nama_pemilik'];
+                $_SESSION['nama_roles'] = $row['nama_roles'];
                 header("Location: ../dashboardPeternak.php");
                 
                 echo "<script>alert('LOGIN BERHASIL')</script>";}
