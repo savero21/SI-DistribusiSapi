@@ -125,7 +125,7 @@ if (!isset($_SESSION['id_petugas'])) {
                                         class="hide-menu">Kelola Petugas</span></a>
                             </li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="#" aria-expanded="false">
+                                    href="kelolaPeternak.php" aria-expanded="false">
                                     <i class="me-3 fa fa-address-book" aria-hidden="true"></i><span
                                         class="hide-menu">Kelola Peternak</span></a>
                             </li>
