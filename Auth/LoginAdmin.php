@@ -68,14 +68,14 @@ if (isset($_POST['submit'])) {
         <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <img src="../assets/img/Pomodoro technique.svg" alt="Image" class="img-fluid">
+            <img src="../assets/img/Sisapi2.svg" alt="Image" class="img-fluid">
             </div>
             <div class="col-md-6 contents">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-9">
                 <div class="mb-4">
                 <h3>Selamat Datang, Admin!</h3>
-                <p class="mb-4">SI-DistribusiSapi merupakan media pencatatan susu sapi yang dikembangkan guna memenuhi tugas matakuliah Workshop 1</p>
+                <p class="mb-4">Silakan masukkan Username dan Password Anda untuk mengakses dashboard halaman.</p>
                 </div>
                 <form action="#" method="post">
                 <div class="form-group first">

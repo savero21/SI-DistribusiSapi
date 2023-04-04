@@ -84,9 +84,10 @@ session_start();
             </div>
             <div class="col-md-6 contents">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-9">
                 <div class="mb-4">
                 <h3>Selamat Datang! </h3>
+                <p class="mb-4">Silakan masukkan Username dan Password Anda untuk mengakses dashboard halaman.</p>
                 </div>
                 <form action="#" method="post">
                 <div class="form-group first">
