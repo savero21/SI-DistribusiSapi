@@ -80,14 +80,13 @@ session_start();
         <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <img src="../assets/img/Global logistics delivery network.svg" alt="Image" class="img-fluid">
+            <img src="../assets/img/Sisapi.svg" alt="Image" class="img-fluid">
             </div>
             <div class="col-md-6 contents">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                 <div class="mb-4">
                 <h3>Selamat Datang! </h3>
-                <p class="mb-4">SI-DistribusiSapi merupakan media pencatatan susu sapi yang dikembangkan guna memenuhi tugas matakuliah Workshop 1</p>
                 </div>
                 <form action="#" method="post">
                 <div class="form-group first">
@@ -105,7 +104,7 @@ session_start();
                     <span class="ml-auto"><a href="./LoginAdmin.php" class="forgot-pass">Anda Admin?</a></span> 
                 </div>
 
-                <button name="submit" class="btn btn-block btn-primary">MASUK</button>
+                <button name="submit" class="btn btn-block btn-info">MASUK</button>
                 </form>
                 </div>
             </div>

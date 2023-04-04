@@ -87,7 +87,8 @@ if (!isset($_SESSION['id_petugas'])) {
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <?php if($_SESSION['nama_roles'] != 'Peternak') {?>
-                                <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
+                                <?php 
+                                    echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
                             <?php } ?>
 
                             <?php if($_SESSION['nama_roles'] == 'Peternak') {?>
@@ -158,7 +159,7 @@ if (!isset($_SESSION['id_petugas'])) {
                                     <a href="Logout.php" class="btn btn-danger text-white mt-4">Logout</a>
                             </li>
 
-                        <?php if($_SESSION['nama_roles'] != 'Admin' ||$_SESSION['nama_roles'] != 'Transaksi' || $_SESSION['nama_roles'] != 'Pencatatan' || $_SESSION['nama_roles'] !='Setor' ) { ?>
+                        <?php if($_SESSION['nama_roles'] == 'Peternak' ) { ?>
                             <div class="px-4 sidebar-heading">
                                 Menu Peternak
                             </div>
