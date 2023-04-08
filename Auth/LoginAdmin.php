@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = ($_POST['password']);
  
-    $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password' AND nama_roles = 'admin'";
+    $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password'";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                 <div class="col-md-9">
                 <div class="mb-4">
                 <h3>Selamat Datang, Admin!</h3>
-                <p class="mb-4">Silakan masukkan Username dan Password Anda untuk mengakses dashboard halaman.</p>
+                <p class="mb-4">Silakan masukkan Username dan Password Anda untuk mengakses dashboard halaman petugas!</p>
                 </div>
                 <form action="#" method="post">
                 <div class="form-group first">

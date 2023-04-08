@@ -2,11 +2,12 @@
  
 session_start();
  
-if (!isset($_SESSION['id_petugas'])) {
-    header("Location: ../Auth/LoginPage.php");
+if (!isset($_SESSION['nama_roles'])) {
+    header("Location: Auth/LoginPage.php");
 }
  
 ?>
+
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -16,25 +17,16 @@ if (!isset($_SESSION['id_petugas'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SI-SAPI</title>
+    <title>Si-Sapi | Peternak</title>
 
     <!-- icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="assets/css/icons/font-awesome/css/fontawesome.css">
     <link href="assets/css/icons/font-awesome/css/brands.css" rel="stylesheet">
     <link href="assets/css/icons/font-awesome/css/solid.css" rel="stylesheet">
-
-    <!-- CSS -->
+    
+    <!-- Custom CSS -->
     <link href="assets/css/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-
-    <!-- style form css -->
-    <link rel="stylesheet" href="assets/css/button-style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/path/to/select2.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -85,16 +77,16 @@ if (!isset($_SESSION['id_petugas'])) {
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <?php if($_SESSION['nama_roles'] != 'Peternak') {?>
-                                <?php 
-                                    echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
-                            <?php } ?>
-
-                            <?php if($_SESSION['nama_roles'] == 'Peternak') {?>
-                                <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang," . $_SESSION['nama_pemilik'] ."!". "</h4>"; ?>
-                            <?php } ?>
-                        </li>
+                        <?php if($_SESSION['nama_roles'] == 'Peternak') { ?>
+                            <li class="nav-item dropdown">
+                                <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,Bapak " . $_SESSION['nama_pemilik'] ."!". "</h4>"; ?>
+                            </li>
+                        <?php } ?>
+                        <?php if($_SESSION['nama_roles'] != 'Peternak') { ?>
+                            <li class="nav-item dropdown">
+                                <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </nav>
@@ -155,24 +147,25 @@ if (!isset($_SESSION['id_petugas'])) {
                                         aria-hidden="true"></i><span class="hide-menu">Pembayaran</span></a></li>
                             <?php } ?>      
                                         
+                            
+                            <?php if($_SESSION['nama_roles'] == 'Peternak' ) { ?>
+                                <div class="px-4 sidebar-heading">
+                                    Menu Peternak
+                                </div>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="peternak.php" aria-expanded="false">
+                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span
+                                class="hide-menu">Kelola Peternak</span></a>
+                            </li>
+                            <?php } ?>
+                            
                             <li class="text-center p-20">
                                     <a href="Logout.php" class="btn btn-danger text-white mt-4">Logout</a>
                             </li>
-
-                        <?php if($_SESSION['nama_roles'] == 'Peternak' ) { ?>
-                            <div class="px-4 sidebar-heading">
-                                Menu Peternak
-                            </div>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="#" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
-                                        aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="peternak.php" aria-expanded="false">
-                                    <i class="me-3 fa fa-user" aria-hidden="true"></i><span
-                                        class="hide-menu">Kelola Peternak</span></a>
-                            </li>
-                        <?php } ?>
-                    </ul>
+                        </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>

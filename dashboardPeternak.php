@@ -1,6 +1,6 @@
 <?php 
     // penting buat templating sidebar sama nav nya
-    include 'sidebarnavPeternak.php'
+    include 'sidebarnav.php'
 ?>     
         <!-- Page wrapper  -->
         <!-- ============================================================== -->

@@ -12,36 +12,41 @@ session_start();
     }
     
     //login petugas
+    // if (isset($_POST['submit'])) {
+    //     var_dump('adadada');
+    //     $username = $_POST['username'];
+    //     $password = ($_POST['password']);
+    //     $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password' && roles.nama_roles != 'admin'";
+    //     $result = mysqli_query($conn, $sql);
+    //     if ($result->num_rows > 0) {
+            
+    //         $row = mysqli_fetch_assoc($result);
+    //         $_SESSION['nama_roles'] = $row['nama_roles'];
+    //         $_SESSION['id_petugas'] = $row['id_petugas'];
+    //         header("Location: ../dashboard.php");
+    //         //alert berhasil masuk
+    //     } else {
+    //         echo "<script>alert('Username atau Password anda salah!')</script>";
+    //     }
+    // }
+    
     if (isset($_POST['submit'])) {
         $username = $_POST['username'];
         $password = ($_POST['password']);
-        $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password' && roles.nama_roles != 'admin'";
-        $result = mysqli_query($conn, $sql);
-        if ($result->num_rows > 0) {
-            var_dump($sql);
-            $row = mysqli_fetch_assoc($result);
-            $_SESSION['nama_roles'] = $row['nama_roles'];
-            $_SESSION['id_petugas'] = $row['id_petugas'];
-            header("Location: ../dashboard.php");
-         
-    //login peternak
-        } else if (isset($_POST['submit'])) {
-            $username = $_POST['username'];
-            $password = ($_POST['password']);
         
-            $sql = "SELECT * FROM peternak WHERE peternak.username = '$username' AND peternak.password = '$password'";
-            $result = mysqli_query($conn, $sql);
-            if ($result->num_rows > 0) {
-                $row = mysqli_fetch_assoc($result);
-                $_SESSION['id_peternak'] = $row['id_peternak'];
-                $_SESSION['nama_pemilik'] = $row['nama_pemilik'];
-                $_SESSION['nama_roles'] = $row['nama_roles'];
-                header("Location: ../dashboardPeternak.php");
-                
-                echo "<script>alert('LOGIN BERHASIL')</script>";}
+        $sql = "SELECT * FROM peternak JOIN roles ON peternak.id_roles = roles.id_role WHERE peternak.username = '$username' AND peternak.password = '$password'";
+        var_dump($sql);
+        $result = mysqli_query($conn, $sql);
+        echo ($SQL);
+        if ($result->num_rows > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['id_peternak'] = $row['id_peternak'];
+            $_SESSION['nama_pemilik'] = $row['nama_pemilik'];
+            $_SESSION['nama_roles'] = $row['nama_roles'];
+            header("Location: ../dashboardPeternak.php");
         } else {
             echo "<script>alert('Username atau Password anda salah!')</script>";
-        }
+            }
     }
 ?>
 
@@ -105,7 +110,7 @@ session_start();
                     <span class="ml-auto"><a href="./LoginAdmin.php" class="forgot-pass">Anda Admin?</a></span> 
                 </div>
 
-                <button name="submit" class="btn btn-block btn-info">MASUK</button>
+                <button name="submit" class="btn btn-block btn-primary">MASUK</button>
                 </form>
                 </div>
             </div>
