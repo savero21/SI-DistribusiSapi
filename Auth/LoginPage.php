@@ -11,31 +11,11 @@ session_start();
         echo "<script>alert('LOGIN BERHASIL')</script>";
     }
     
-    //login petugas
-    // if (isset($_POST['submit'])) {
-    //     var_dump('adadada');
-    //     $username = $_POST['username'];
-    //     $password = ($_POST['password']);
-    //     $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password' && roles.nama_roles != 'admin'";
-    //     $result = mysqli_query($conn, $sql);
-    //     if ($result->num_rows > 0) {
-            
-    //         $row = mysqli_fetch_assoc($result);
-    //         $_SESSION['nama_roles'] = $row['nama_roles'];
-    //         $_SESSION['id_petugas'] = $row['id_petugas'];
-    //         header("Location: ../dashboard.php");
-    //         //alert berhasil masuk
-    //     } else {
-    //         echo "<script>alert('Username atau Password anda salah!')</script>";
-    //     }
-    // }
-    
     if (isset($_POST['submit'])) {
         $username = $_POST['username'];
         $password = ($_POST['password']);
         
         $sql = "SELECT * FROM peternak JOIN roles ON peternak.id_roles = roles.id_role WHERE peternak.username = '$username' AND peternak.password = '$password'";
-        var_dump($sql);
         $result = mysqli_query($conn, $sql);
         echo ($SQL);
         if ($result->num_rows > 0) {

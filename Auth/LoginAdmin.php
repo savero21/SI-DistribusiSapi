@@ -22,13 +22,11 @@ if (isset($_POST['submit'])) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['id_petugas'] = $row['id_petugas'];
         $_SESSION['nama_roles'] = $row['nama_roles'];
-        header("Location: ../dashboard.php");
         
-        echo "<script>alert('LOGIN BERHASIL')</script>";
+        header("Location: ../dashboard.php");
     } else {
-        echo "<script>alert('ANDA BUKAN ADMIN!')</script>";
+        echo "<script>alert('Username atau Password anda salah!')</script>";
     }
-    // echo var_dump($sql);
 }
 ?>
 
