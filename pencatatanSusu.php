@@ -1,10 +1,48 @@
 <?php 
     include_once 'config.php';
-    require_once('sidebarnav.php');
+    require 'sidebarnav.php';
 
     $tz = 'Asia/Jakarta';
     $dt = new DateTime("now", new DateTimeZone($tz));
     $timestamp = $dt->format('Y-m-d G:i:s');
+    
+    //insert session
+    $id = $_SESSION['id_petugas'];
+    ob_start();
+
+    $redirect_path = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] ;
+    if(isset($_POST['create'])) {
+        $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
+        $id_petugas = $id;
+        $lemak = $conn->real_escape_string($_POST['lemak']);
+        $protein = $conn->real_escape_string($_POST['protein']);
+        $tLiter = $conn->real_escape_string($_POST['total_liter']);
+        $hLiter = $conn->real_escape_string($_POST['harga_liter']);
+        $hTotal = ($tLiter * $hLiter);
+        // $datetime = $conn->real_escape_string($_POST['datetime']);
+
+        $sql = "INSERT INTO pengumpulan_susu (id_pengumpulan_susu, id_peternak, id_petugas_pencatatan, kandungan_lemak, kandungan_protein, jumlah_liter, harga_susu, harga_total) VALUES (NULL, '$id_peternak', '$id_petugas', '$lemak', '$protein', '$tLiter', '$hLiter', '$hTotal')";
+        $conn->query($sql) or die(mysqli_error($conn));
+        ?>
+        <script>
+            alert("Data berhasil ditambahkan");
+            window.location.assign("<?= $redirect_path?>")
+        </script>
+        <?php
+    }  
+
+
+    if (isset($_POST['delete'])) {
+        $id_kumpul = $conn->real_escape_string($_POST['delete']);
+        $sql = "DELETE FROM pengumpulan_susu WHERE id_pengumpulan_susu = '$id_kumpul'";
+        $conn->query($sql) or die(mysqli_error($conn));
+        ?>
+        <script>
+            alert("Data berhasil dihapus");
+            window.location.assign("<?= $redirect_path?>")
+        </script>
+        <?php
+    }
 ?>
 
 <!-- Page wrapper  -->
@@ -28,26 +66,26 @@
                     </div>
 
                     <!-- table  -->
-                    <?php if(isset($_GET['add'])): ?>
-                    <?php 
+                    <?php if(isset($_GET['add'])): 
+                    
                         //fetch data session login
-                        $id = $_SESSION['id_petugas'];
+                        
                         $dataPetugas = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM Petugas WHERE id_petugas =" .$id));
                     ?>
-                        <form>
+                        <form action="" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="name">Tanggal & Waktu</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder=" <?= $timestamp?>"disabled>
+                            <input type="text" class="form-control" id="datetime" name="datetime" placeholder=" <?= $timestamp?>"disabled>
                             </div>
                             <div class="form-group col-md-6">
                             <label for="name">Nama Petugas</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder=" <?= $dataPetugas['nama']?>" disabled>
+                            <input type="text" class="form-control" id="id_petugas" value="<?= $dataPetugas['id_petugas']?>" placeholder=" <?= $dataPetugas['nama']?>" disabled>
                             </div>
                         </div> <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="name">nama peternak</label>
-                            <select id="peternak" name="nama_pemilik" class="form-control">
+                            <select id="id_peternak" name="id_peternak" class="form-control">
                                 <?php 
                                     $data=mysqli_query($conn, "SELECT * FROM Peternak");
                                     while($dataPeternak = mysqli_fetch_array($data)) { 
@@ -61,66 +99,70 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputCity">Kandungan Lemak</label>
-                                <input type="text" class="form-control" id="inputCity" placeholder="Lemak">
+                                <input type="text" class="form-control" id="lemak" name="lemak" placeholder="Lemak">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputCity">Kandungan Protein</label>
-                                <input type="text" class="form-control" id="inputCity" placeholder="Protein">
+                                <input type="text" class="form-control" id="protein" name="protein" placeholder="Protein">
                             </div>
                         </div>  
                         <div class="form-row">
                             <div class="form-group col-md-2">
                                 <label for="inputCity">Total Liter</label>
-                                <input type="number" class="form-control" id="inputCity" placeholder="Liter">
+                                <input type="number" class="form-control" id="total_liter" name="total_liter" placeholder="Total Liter">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="inputCity">Harga per-Liter</label>
-                                <input type="text" class="form-control" id="inputCity" placeholder="Liter">
+                                <input type="text" class="form-control" id="harga_liter" name="harga_liter" placeholder="Masukkan Harga">
                             </div>
                         </div>          
                                     
                         <div class="form-group"> 
-                            <button type="submit" class="btn btn-success fa-plus "> Tambah Data</button>
+                            <button type="submit" class="btn btn-success fa-plus" name="create"> Tambah Data</button>
                         </div>
                     </form>
                     <?php endif?>
-                    
-                    <?php if(!isset($_GET['add']) && !isset($_GET['edit'])): ?>                      
-                    <div class="my-4">
-                        <table id="example" class="table table-striped" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Petugas</th>
-                                    <th>Nama Peternak</th>
-                                    <th>Lemak</th>
-                                    <th>Jumlah</th>
-                                    <th>Harga Susu</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu ps JOIN peternak pe ON pe.id_peternak = ps.id_peternak JOIN petugas pet ON pet.id_petugas = ps.id_petugas_pencatatan; ");
-                                    $number = 1;
-                                    while($data = mysqli_fetch_array($result)) {         
-                                        echo "<tr>";
-                                        // echo "<td>".$data['id_pengumpulan_susu']."</td>";
-                                        echo "<td>".$number++."</td>";
-                                        echo "<td>".$data['nama']."</td>";
-                                        echo "<td>".$data['nama_pemilik']."</td>";  
-                                        echo "<td>".$data['kandungan_lemak']."</td>";    
-                                        echo "<td>".$data['jumlah_liter']."</td>";    
-                                        echo "<td>".$data['harga_susu']."</td>";    
-                                        echo "<td><a href='edit.php?id=$data[id_pengumpulan_susu]' class='btn btn-warning'><i class='fa-solid fa-pen-to-square'></i> Edit</a>
-                                        <a href='edit.php?id=$data[id_pengumpulan_susu]' class='btn btn-danger'><i class='fa-solid fa-xmark'></i> Delete</a></td></tr>";        
-                                    }
-                                    ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <?php endif?>
 
+
+                    <?php if(!isset($_GET['add']) && !isset($_GET['edit'])): ?>                      
+                        <div class="my-4">
+                            <table id="example" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Petugas</th>
+                                        <th>Nama Peternak</th>
+                                        <th>Lemak</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga Susu</th>
+                                        <th>Harga Total</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu ps JOIN peternak pe ON pe.id_peternak = ps.id_peternak JOIN petugas pet ON pet.id_petugas = ps.id_petugas_pencatatan; ");
+                                        $number = 1;
+                                        while($data = mysqli_fetch_array($result)):  ?>     
+                                            <tr>
+                                                <td><?=  $number++ ?></td>
+                                                <td><?= $data['nama'] ?></td>
+                                                <td><?= $data['nama_pemilik']?></td>  
+                                                <td><?= $data['kandungan_lemak']?></td>    
+                                                <td><?= $data['jumlah_liter']?></td>    
+                                                <td><?= $data['harga_susu']?></td>    
+                                                <td><?= $data['harga_total']?></td>    
+                                                <td>
+                                                    <form action="" method="post">
+                                                        <button type="submit" class="btn bg-danger text-white" name="delete" value="<?= $data['id_pengumpulan_susu'] ?>">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif ?>                
                     </div>
                 </div>        
             </div>
@@ -128,9 +170,9 @@
             <?php require_once('footer.php'); ?>
 
             <script>
-                $(document).ready(function () {
+                    $(document).ready(function () {
                     $('#example').DataTable();
-                    responsive: true;
                     });
             </script>
+            
 

@@ -7,7 +7,7 @@ error_reporting(0);
 session_start();
  
     if (isset($_SESSION['username'])) {
-        // header("Location: berhasil_login.php");
+        header("Location: ../dashboardPeternak.php");
         echo "<script>alert('LOGIN BERHASIL')</script>";
     }
     

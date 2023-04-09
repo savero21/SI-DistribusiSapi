@@ -27,6 +27,8 @@ if (!isset($_SESSION['nama_roles'])) {
     
     <!-- Custom CSS -->
     <link href="assets/css/style.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+    
 </head>
 
 <body>

@@ -7,7 +7,7 @@ error_reporting(0);
 session_start();
  
 if (isset($_SESSION['id_petugas'])) {
-    header("Location: berhasil_login.php");
+    header("Location: ../dashboard.php");
 
     echo "<script>alert('LOGIN BERHASIL')</script>";
 }
