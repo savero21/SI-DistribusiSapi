@@ -3,10 +3,11 @@
 session_start();
  
 if (!isset($_SESSION['nama_roles'])) {
-    header("Location: ../Auth/LoginPage.php");
+    header("Location: Auth/LoginPage.php");
 }
  
 ?>
+
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -16,24 +17,18 @@ if (!isset($_SESSION['nama_roles'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SI-SAPI</title>
+    <title>Si-Sapi | Peternak</title>
 
     <!-- icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="assets/css/icons/font-awesome/css/fontawesome.css">
     <link href="assets/css/icons/font-awesome/css/brands.css" rel="stylesheet">
     <link href="assets/css/icons/font-awesome/css/solid.css" rel="stylesheet">
-
-    <!-- CSS -->
+    
+    <!-- Custom CSS -->
     <link href="assets/css/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-
-    <!-- style form css -->
-    <link rel="stylesheet" href="assets/css/button-style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/path/to/select2.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+    
 </head>
 
 <body>
@@ -71,7 +66,7 @@ if (!isset($_SESSION['nama_roles'])) {
                         <?php 
                             date_default_timezone_set('Asia/jakarta');
                             $time= time();
-                            $atime = date('Y-md',$time);
+                            $atime = date('Y-m-d',$time);
                             
                             echo "<h5 class='text-white bg-transparent'>" . $atime . "</h5><br>"; 
                         ?>
@@ -84,13 +79,23 @@ if (!isset($_SESSION['nama_roles'])) {
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
-                        </li>
+                        <?php if($_SESSION['nama_roles'] == 'Peternak') { ?>
+                            <li class="nav-item dropdown">
+                                <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,Bapak " . $_SESSION['nama_pemilik'] ."!". "</h4>"; ?>
+                            </li>
+                        <?php } ?>
+                        <?php if($_SESSION['nama_roles'] != 'Peternak') { ?>
+                            <li class="nav-item dropdown">
+                                <?php echo "<h4 class='pe-4 text-white bg-transparent'>Selamat Datang,petugas " . $_SESSION['nama_roles'] ."!". "</h4>"; ?>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </nav>
         </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -101,44 +106,68 @@ if (!isset($_SESSION['nama_roles'])) {
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <!-- Divider -->
-                        <div class="px-4 sidebar-heading">
-                            Menu Admin
-                        </div>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="dashboard.php" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
-                                    aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false">
-                                <i class="me-3 fa fa-users" aria-hidden="true"></i><span
-                                    class="hide-menu">Kelola Petugas</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false">
-                                <i class="me-3 fa fa-address-book   " aria-hidden="true"></i><span
-                                    class="hide-menu">Kelola Peternak</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false">
-                                <i class="me-3 fa fa-truck" aria-hidden="true"></i><span
-                                    class="hide-menu">Kelola Mitra</span></a>
-                        </li>
 
-                        <div class="px-4 pt-4 sidebar-heading">
-                            Menu Petugas
-                        </div>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pencatatanSusu.php" aria-expanded="false"><i class="me-3 fa fa-filter"
-                                    aria-hidden="true"></i><span class="hide-menu">Pencatatan Susu</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="me-3 fa fa-home"
-                                    aria-hidden="true"></i><span class="hide-menu">Gudang Susu</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map-google.html" aria-expanded="false"><i class="me-3 fa fa-credit-card-alt "
-                                    aria-hidden="true"></i><span class="hide-menu">Pembayaran</span></a></li>
-                        <li class="text-center p-20">
-                            <a href="Logout.php" class="btn btn-danger text-white mt-4">Logout</a>
-                        </li>
-                    </ul>
+                        <?php if($_SESSION['nama_roles'] == 'Admin') {?>
+                            <div class="px-4 sidebar-heading">
+                                Menu Admin
+                            </div>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="dashboard.php" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
+                                        aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="kelolaPetugas.php" aria-expanded="false">
+                                    <i class="me-3 fa fa-users" aria-hidden="true"></i><span
+                                        class="hide-menu">Kelola Petugas</span></a>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="kelolaPeternak.php" aria-expanded="false">
+                                    <i class="me-3 fa fa-address-book" aria-hidden="true"></i><span
+                                        class="hide-menu">Kelola Peternak</span></a>
+                            </li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="kelolamitra.php" aria-expanded="false">
+                                    <i class="me-3 fa fa-truck" aria-hidden="true"></i><span
+                                        class="hide-menu">Kelola Mitra</span></a>
+                            </li>
+                        <?php } ?>
+                        
+                        <?php if($_SESSION['nama_roles'] == 'Transaksi' || $_SESSION['nama_roles'] == 'Pencatatan' || $_SESSION['nama_roles'] =='Setor' ) {?>
+                            <div class="px-4 sidebar-heading">
+                                Menu Petugas
+                            </div>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="dashboard.php" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
+                                        aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="pencatatanSusu.php" aria-expanded="false"><i class="me-3 fa fa-filter"
+                                        aria-hidden="true"></i><span class="hide-menu">Pencatatan Susu</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="kelolaGudang.php" aria-expanded="false"><i class="me-3 fa fa-home"
+                                        aria-hidden="true"></i><span class="hide-menu">Gudang Susu</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="map-google.html" aria-expanded="false"><i class="me-3 fa fa-credit-card-alt "
+                                        aria-hidden="true"></i><span class="hide-menu">Pembayaran</span></a></li>
+                            <?php } ?>      
+                                        
+                            
+                            <?php if($_SESSION['nama_roles'] == 'Peternak' ) { ?>
+                                <div class="px-4 sidebar-heading">
+                                    Menu Peternak
+                                </div>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="peternak.php" aria-expanded="false">
+                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span
+                                class="hide-menu">Kelola Peternak</span></a>
+                            </li>
+                            <?php } ?>
+                            
+                            <li class="text-center p-20">
+                                    <a href="Logout.php" class="btn btn-danger text-white mt-4">Logout</a>
+                            </li>
+                        </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -147,26 +176,3 @@ if (!isset($_SESSION['nama_roles'])) {
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-
-    <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.js"></script>
-    <!--This page JavaScript -->
-    <!--flot chart-->
-    <script src="assets/plugins/flot/jquery.flot.js"></script>
-    <script src="assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="assets/js/pages/dashboards/dashboard1.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-</body>
-
-</html>

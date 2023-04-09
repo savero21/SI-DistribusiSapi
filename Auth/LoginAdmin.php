@@ -6,8 +6,8 @@ error_reporting(0);
  
 session_start();
  
-if (isset($_SESSION['username'])) {
-    // header("Location: berhasil_login.php");
+if (isset($_SESSION['id_petugas'])) {
+    header("Location: ../dashboard.php");
 
     echo "<script>alert('LOGIN BERHASIL')</script>";
 }
@@ -16,18 +16,17 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = ($_POST['password']);
  
-    $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password' AND nama_roles = 'admin'";
+    $sql = "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role WHERE petugas.username = '$username' AND petugas.password = '$password'";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
+        $_SESSION['id_petugas'] = $row['id_petugas'];
         $_SESSION['nama_roles'] = $row['nama_roles'];
-        header("Location: ../dashboard.php");
         
-        echo "<script>alert('LOGIN BERHASIL')</script>";
+        header("Location: ../dashboard.php");
     } else {
-        echo "<script>alert('ANDA BUKAN ADMIN!')</script>";
+        echo "<script>alert('Username atau Password anda salah!')</script>";
     }
-    // echo var_dump($sql);
 }
 ?>
 
@@ -67,14 +66,14 @@ if (isset($_POST['submit'])) {
         <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <img src="../assets/img/Pomodoro technique.svg" alt="Image" class="img-fluid">
+            <img src="../assets/img/Sisapi2.svg" alt="Image" class="img-fluid">
             </div>
             <div class="col-md-6 contents">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-9">
                 <div class="mb-4">
                 <h3>Selamat Datang, Admin!</h3>
-                <p class="mb-4">SI-DistribusiSapi merupakan media pencatatan susu sapi yang dikembangkan guna memenuhi tugas matakuliah Workshop 1</p>
+                <p class="mb-4">Silakan masukkan Username dan Password Anda untuk mengakses dashboard halaman petugas!</p>
                 </div>
                 <form action="#" method="post">
                 <div class="form-group first">

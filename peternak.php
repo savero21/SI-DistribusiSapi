@@ -1,5 +1,5 @@
 <?php 
-    include 'sidebarnav.php';
+    require_once('sidebarnavPeternak.php');
     include_once 'config.php';
 ?>
 
@@ -50,19 +50,7 @@
                 </div>        
             </div>
 
-        
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                © <?= date('Y') ?> by Workshop
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-    <!-- ============================================================== -->
-<!-- End Wrapper -->
+            <?php require_once('footer.php') ?>
 
 <script>
     $(document).ready(function () {
