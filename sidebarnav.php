@@ -147,8 +147,11 @@ if (!isset($_SESSION['nama_roles'])) {
                                     href="kelolaGudang.php" aria-expanded="false"><i class="me-3 fa fa-home"
                                         aria-hidden="true"></i><span class="hide-menu">Gudang Susu</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="map-google.html" aria-expanded="false"><i class="me-3 fa fa-credit-card-alt "
+                                    href="pembayaran.php" aria-expanded="false"><i class="me-3 fa fa-credit-card-alt "
                                         aria-hidden="true"></i><span class="hide-menu">Pembayaran</span></a></li>
+                                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="setorSusu.php" aria-expanded="false"><i class="me-3 fa fa-credit-card-alt "
+                                        aria-hidden="true"></i><span class="hide-menu">Setor Susu</span></a></li>
                             <?php } ?>      
                                         
                             
