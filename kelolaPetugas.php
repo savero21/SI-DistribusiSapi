@@ -141,14 +141,16 @@
                                     <th>Username</th>
                                     <th>Role</th>
                                     <th>Aksi</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $result = mysqli_query($conn, "SELECT * FROM petugas"); ?>
-                                <?php while ($data = mysqli_fetch_array($result)): ?>
+                                <?php $result = mysqli_query($conn, "SELECT * FROM petugas"); 
+                                    $number = 1;
+                                ?>
+                                <?php while ($data = mysqli_fetch_array($result)): 
+                                    ?>
                                     <tr>
-                                        <td><?= $data['id_petugas'] ?></td>
+                                        <td><?= $number++ ?></td>
                                         <td><?= $data['nama'] ?></td>
                                         <td><?= $data['no_hp'] ?></td>
                                         <td><?= $data['alamat'] ?></td>

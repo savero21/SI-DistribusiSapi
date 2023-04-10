@@ -6,12 +6,13 @@
     $redirect_path = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] ;
     if(isset($_POST['create'])) {
         $nama_pemilik = $conn->real_escape_string($_POST['nama_pemilik']);
-        $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
+        // $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
         $nama_peternakan = $conn->real_escape_string($_POST['nama_peternakan']);
         $no_hp = $conn->real_escape_string($_POST['no_hp']);
         $norek = $conn->real_escape_string($_POST['norek']);
+        $id_role = 5;
 
-        $sql = "INSERT INTO peternak (id_peternak, nama_pemilik , nama_peternakan, no_hp, norek) VALUES ('$id_peternak', '$nama_pemilik', '$nama_peternakan', '$no_hp', '$norek')";
+        $sql = "INSERT INTO peternak (nama_pemilik , nama_peternakan, no_hp, norek, id_roles) VALUES ('$id_peternak', '$nama_pemilik', '$nama_peternakan', '$no_hp', '$norek')";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
