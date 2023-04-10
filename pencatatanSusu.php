@@ -82,7 +82,8 @@
                             <label for="name">Nama Petugas</label>
                             <input type="text" class="form-control" id="id_petugas" value="<?= $dataPetugas['id_petugas']?>" placeholder=" <?= $dataPetugas['nama']?>" disabled>
                             </div>
-                        </div> <div class="form-row">
+                        </div> 
+                        <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="name">nama peternak</label>
                             <select id="id_peternak" name="id_peternak" class="form-control">
@@ -90,7 +91,7 @@
                                     $data=mysqli_query($conn, "SELECT * FROM Peternak");
                                     while($dataPeternak = mysqli_fetch_array($data)) { 
                                     ?>
-                                        <option value="<?= $dataPeternak['id_peternak']?>"><?= $dataPeternak['nama_pemilik'] ?></option>
+                                        <option value="<?= $dataPeternak['id_peternak']?>"> <?= $dataPeternak['nama_pemilik'] ?></option>
 
                                     <?php 
                                     };

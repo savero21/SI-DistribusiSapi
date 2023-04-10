@@ -22,12 +22,14 @@ if (!isset($_SESSION['nama_roles'])) {
     <!-- icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="assets/css/icons/font-awesome/css/fontawesome.css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/icons/font-awesome/css/brands.css" rel="stylesheet">
     <link href="assets/css/icons/font-awesome/css/solid.css" rel="stylesheet">
     
     <!-- Custom CSS -->
     <link href="assets/css/style.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+    
     
 </head>
 
