@@ -6,13 +6,15 @@
     $redirect_path = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] ;
     if(isset($_POST['create'])) {
         $nama_pemilik = $conn->real_escape_string($_POST['nama_pemilik']);
-        // $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
+        $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
         $nama_peternakan = $conn->real_escape_string($_POST['nama_peternakan']);
         $no_hp = $conn->real_escape_string($_POST['no_hp']);
+        $username = $conn->real_escape_string($_POST['username']);
+        $password = $conn->real_escape_string($_POST['password']);
         $norek = $conn->real_escape_string($_POST['norek']);
-        $id_role = 5;
+        $role = 5;
 
-        $sql = "INSERT INTO peternak (nama_pemilik , nama_peternakan, no_hp, norek, id_roles) VALUES ('$id_peternak', '$nama_pemilik', '$nama_peternakan', '$no_hp', '$norek')";
+        $sql = "INSERT INTO peternak (id_peternak, nama_pemilik , nama_peternakan, no_hp, username, password, norek, id_roles) VALUES ('$id_peternak', '$nama_pemilik', '$nama_peternakan', '$no_hp', '$username', '$password', '$norek', '$role')";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -25,10 +27,11 @@
         $nama_pemilik = $conn->real_escape_string($_POST['nama_pemilik']);
         $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
         $nama_peternakan = $conn->real_escape_string($_POST['nama_peternakan']);
+        $alamat = $conn->real_escape_string($_POST['alamat']);
         $no_hp = $conn->real_escape_string($_POST['no_hp']);
         $norek = $conn->real_escape_string($_POST['norek']);
 
-        $sql = "UPDATE peternak SET nama_pemilik = '$nama_pemilik', nama_peternakan = '$nama_peternakan', no_hp = '$no_hp', norek = '$norek' WHERE id_peternak = '$id_peternak'";
+        $sql = "UPDATE peternak SET nama_pemilik = '$nama_pemilik', nama_peternakan = '$nama_peternakan',  no_hp = '$no_hp', norek = '$norek' WHERE id_peternak = '$id_peternak'";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -80,6 +83,14 @@
                                 <input id="nama_peternakan" name="nama_peternakan" type="text" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="username">Username</label>
+                                <input id="username" name="username" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="no_hp">Nomor HP</label>
                                 <input id="no_hp" name="no_hp" type="text" class="form-control">
                             </div>
@@ -96,7 +107,7 @@
                         <form class="mt-2" action="" method="post">
                         <div class="form-group">
                                 <label for="id_peternak">ID Peternak</label>
-                                <input id="id_peternak" name="id_peternak" type="text" class="form-control">
+                                <input id="id_peternak" name="id_peternak" type="text" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="nama_pemilik">Nama Pemilik</label>
@@ -105,6 +116,10 @@
                             <div class="form-group">
                                 <label for="nama_peternakan">Nama Peternakan</label>
                                 <input id="nama_peternakan" name="nama_peternakan" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <input id="alamat" name="alamat" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="no_hp">Nomor HP</label>
@@ -127,6 +142,8 @@
                                     <th>Nama Pemilik</th>
                                     <th>Nama Peternakan</th>
                                     <th>No HP</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
                                     <th>Norek</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -139,9 +156,11 @@
                                         <td><?= $data['nama_pemilik'] ?></td>
                                         <td><?= $data['nama_peternakan'] ?></td>
                                         <td><?= $data['no_hp'] ?></td>
+                                        <td><?= $data['username'] ?></td>
+                                        <td><?= $data['password'] ?></td>
                                         <td><?= $data['norek'] ?></td>
                                         <td class="d-flex gap-3">
-                                            <a class="btn btn-outline-primary" href="?edit=<?= $data['id_peternak'] ?>&nama_pemilik=<?= $data['nama_pemilik']?>&no_hp=<?= $data['no_hp']?>&norek=<?= $data['norek']?>">Ubah</a>
+                                            <a class="btn btn-outline-primary" href="?edit= <?= $data['id_peternak'] ?>&nama_pemilik=<?= $data['nama_pemilik']?>&nama_peternakan=<?= $data['nama_peternakan']?>&no_hp=<?= $data['no_hp']?>&norek=<?= $data['norek']?>">Ubah</a>
 
                                             <form action="" method="post">
                                                 <button type="submit" class="btn btn-outline-danger" name="delete" value="<?= $data['id_peternak'] ?>">Hapus</button>
