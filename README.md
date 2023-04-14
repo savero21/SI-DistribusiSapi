@@ -32,3 +32,4 @@ pembayaran peternak (savero)
 setor susu (savero)
 login page (diki)
 
+test savero
