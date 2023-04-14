@@ -127,10 +127,10 @@
                                         <td><?= $data['kandungan_lemak'] ?></td>
                                         <td><?= $data['kandungan_protein'] ?></td>
                                         <td class="d-flex gap-3">
-                                            <a class="btn btn-outline-primary" href="?edit=<?= $data['id_gudang'] ?>&jumlah=<?= $data['jumlah']?>&kandungan_lemak=<?= $data['kandungan_lemak']?>&kandungan_protein=<?= $data['kandungan_protein']?>">Ubah</a>
+                                            <a class="btn bg-warning text-white" href="?edit=<?= $data['id_gudang'] ?>&jumlah=<?= $data['jumlah']?>&kandungan_lemak=<?= $data['kandungan_lemak']?>&kandungan_protein=<?= $data['kandungan_protein']?>">Ubah</a>
 
                                             <form action="" method="post">
-                                                <button type="submit" class="btn btn-outline-danger" name="delete" value="<?= $data['id_gudang'] ?>">Hapus</button>
+                                                <button type="submit" class="btn bg-danger text-white" name="delete" value="<?= $data['id_gudang'] ?>">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
