@@ -41,7 +41,7 @@
     }  
     
     if (isset($_POST['delete'])) {
-        $id_mitra = $conn->real_escape_string($_POST['delete']);
+        $id_petugas = $conn->real_escape_string($_POST['delete']);
         $sql = "DELETE FROM petugas WHERE id_petugas = '$id_petugas'";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
@@ -60,13 +60,16 @@
                     <div class="row align-items-center">
                         <div class="align-self-center d-flex gap-3">
                             <h3 class="page-title mb-0 p-0">Data Petugas</h3>
+                        </div>
+                    </div>
+                    <div class="mt-4 align-items-right">
+                        <div class="text-end upgrade-btn">
                             <?php if(!isset($_GET['add'])): ?>
-                                <a href="?add=true" class="btn btn-success">
-                                    Tambah Data Petugas +
-                                </a>
+                                <a href="?add=true"
+                                class="btn btn-success d-none d-md-inline-block text-white">Add Data Petugas <i class="fa-solid fa-plus"></i></a>
                             <?php endif?>
                         </div>
-
+                    </div>
                     <!-- table  -->
                     <?php if(isset($_GET['add'])): ?>
                         <form class="mt-2" action="" method="post">
@@ -140,7 +143,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $result = mysqli_query($conn, "SELECT * FROM petugas"); 
+                                <?php $result = mysqli_query($conn, "SELECT * FROM petugas JOIN roles ON petugas.id_role = roles.id_role"); 
                                     $number = 1;
                                 ?>
                                 <?php while ($data = mysqli_fetch_array($result)): 
@@ -151,12 +154,12 @@
                                         <td><?= $data['no_hp'] ?></td>
                                         <td><?= $data['alamat'] ?></td>
                                         <td><?= $data['username'] ?></td>
-                                        <td><?= $data['id_role'] ?></td>
+                                        <td><?= $data['nama_roles'] ?></td>
                                         <td class="d-flex gap-3">
-                                            <a class="btn btn-outline-primary" href="?edit=<?= $data['id_petugas'] ?>&nama=<?= $data['nama']?>&no_hp=<?= $data['no_hp']?>&alamat=<?= $data['alamat']?>&username=<?= $data['username']?>&id_role=<?= $data['id_role']?>">Ubah</a>
+                                            <a class="btn bg-warning text-white" href="?edit=<?= $data['id_petugas'] ?>&nama=<?= $data['nama']?>&no_hp=<?= $data['no_hp']?>&alamat=<?= $data['alamat']?>&username=<?= $data['username']?>&id_role=<?= $data['id_role']?>">Ubah</a>
 
                                             <form action="" method="post">
-                                                <button type="submit" class="btn btn-outline-danger" name="delete" value="<?= $data['id_petugas'] ?>">Hapus</button>
+                                                <button type="submit" class="btn bg-danger text-white" name="delete" value="<?= $data['id_petugas'] ?>">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>

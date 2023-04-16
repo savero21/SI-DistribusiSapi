@@ -80,7 +80,7 @@
                             </div>
                             <div class="form-group col-md-6">
                             <label for="name">Nama Petugas</label>
-                            <input type="text" class="form-control" id="id_petugas" value="<?= $dataPetugas['id_petugas']?>" placeholder=" <?= $dataPetugas['nama']?>" disabled>
+                            <input type="text" class="form-control" id="id_petugas" placeholder=" <?= $dataPetugas['nama']?>" disabled>
                             </div>
                         </div> 
                         <div class="form-row">

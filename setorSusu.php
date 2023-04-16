@@ -56,13 +56,16 @@
                     <div class="row align-items-center">
                         <div class="align-self-center d-flex gap-3">
                             <h3 class="page-title mb-0 p-0">Data Setor Susu</h3>
+                        </div>
+                    </div>
+                    <div class="mt-4 align-items-right">
+                        <div class="text-end upgrade-btn">
                             <?php if(!isset($_GET['add'])): ?>
-                                <a href="?add=true" class="btn btn-success">
-                                    Tambah Data Setor Susu +
-                                </a>
+                                <a href="?add=true"
+                                class="btn btn-success d-none d-md-inline-block text-white">Add Data Setor Susu<i class="fa-solid fa-plus"></i></a>
                             <?php endif?>
                         </div>
-
+                    </div>
                     <!-- table  -->
                     <?php if(isset($_GET['add'])): ?>
                         <form class="mt-2" action="" method="post">

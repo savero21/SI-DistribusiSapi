@@ -60,13 +60,16 @@
                     <div class="row align-items-center">
                         <div class="align-self-center d-flex gap-3">
                             <h3 class="page-title mb-0 p-0">Data Peternak</h3>
+                        </div>
+                    </div>
+                    <div class="mt-4 align-items-right">
+                        <div class="text-end upgrade-btn">
                             <?php if(!isset($_GET['add'])): ?>
-                                <a href="?add=true" class="btn btn-success">
-                                    Tambah Data Peternak +
-                                </a>
+                                <a href="?add=true"
+                                class="btn btn-success d-none d-md-inline-block text-white">Add Data Peternak <i class="fa-solid fa-plus"></i></a>
                             <?php endif?>
                         </div>
-
+                    </div>
                     <!-- table  -->
                     <?php if(isset($_GET['add'])): ?>
                         <form class="mt-2" action="" method="post">
@@ -160,10 +163,10 @@
                                         <td><?= $data['password'] ?></td>
                                         <td><?= $data['norek'] ?></td>
                                         <td class="d-flex gap-3">
-                                            <a class="btn btn-outline-primary" href="?edit= <?= $data['id_peternak'] ?>&nama_pemilik=<?= $data['nama_pemilik']?>&nama_peternakan=<?= $data['nama_peternakan']?>&no_hp=<?= $data['no_hp']?>&norek=<?= $data['norek']?>">Ubah</a>
+                                            <a class="btn bg-warning text-white" href="?edit= <?= $data['id_peternak'] ?>&nama_pemilik=<?= $data['nama_pemilik']?>&nama_peternakan=<?= $data['nama_peternakan']?>&no_hp=<?= $data['no_hp']?>&norek=<?= $data['norek']?>">Ubah</a>
 
                                             <form action="" method="post">
-                                                <button type="submit" class="btn btn-outline-danger" name="delete" value="<?= $data['id_peternak'] ?>">Hapus</button>
+                                                <button type="submit" class="btn bg-danger text-white" name="delete" value="<?= $data['id_peternak'] ?>">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
