@@ -5,7 +5,7 @@
 
     $redirect_path = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] ;
     if(isset($_POST['create'])) {
-        $id_petugas = $conn->real_escape_string($_POST['id_petugas']);
+        
         $nama = $conn->real_escape_string($_POST['nama']);
         $no_hp = $conn->real_escape_string($_POST['no_hp']);
         $alamat = $conn->real_escape_string($_POST['alamat']);
@@ -70,10 +70,6 @@
                     <!-- table  -->
                     <?php if(isset($_GET['add'])): ?>
                         <form class="mt-2" action="" method="post">
-                            <div class="form-group">
-                                <label for="id_petugas">ID Petugas</label>
-                                <input id="id_petugas" name="id_petugas" type="text" class="form-control">
-                            </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input id="nama" name="nama" type="text" class="form-control">
