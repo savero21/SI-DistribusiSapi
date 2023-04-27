@@ -5,12 +5,12 @@
 
     $redirect_path = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] ;
     if(isset($_POST['create'])) {
-        $id_gudang = $conn->real_escape_string($_POST['id_gudang']);
+        // $id_gudang = $conn->real_escape_string($_POST['id_gudang']);
         $jumlah = $conn->real_escape_string($_POST['jumlah']);
         $kandungan_lemak = $conn->real_escape_string($_POST['kandungan_lemak']);
         $kandungan_protein = $conn->real_escape_string($_POST['kandungan_protein']);
 
-        $sql = "INSERT INTO gudang (id_gudang, jumlah, kandungan_lemak, kandungan_protein) VALUES ('$id_gudang', '$jumlah', '$kandungan_lemak', '$kandungan_protein')";
+        $sql = "INSERT INTO gudang (id_gudang, jumlah, kandungan_lemak, kandungan_protein) VALUES (null, '$jumlah', '$kandungan_lemak', '$kandungan_protein')";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -68,21 +68,19 @@
                     <!-- table  -->
                     <?php if(isset($_GET['add'])): ?>
                         <form class="mt-2" action="" method="post">
-                            <div class="form-group">
-                                <label for="id_gudang">Id Gudang</label>
-                                <input id="id_gudang" name="id_gudang" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
-                                <input id="jumlah" name="jumlah" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="kandungan_lemak">Kandungan Lemak</label>
-                                <input id="kandungan_lemak" name="kandungan_lemak" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="kandungan_protein">Kandungan Protein</label>
-                                <input id="kandungan_protein" name="kandungan_protein" type="text" class="form-control">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="jumlah">Jumlah</label>
+                                    <input id="jumlah" name="jumlah" type="text" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="kandungan_lemak">Kandungan Lemak</label>
+                                    <input id="kandungan_lemak" name="kandungan_lemak" type="text" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="kandungan_protein">Kandungan Protein</label>
+                                    <input id="kandungan_protein" name="kandungan_protein" type="text" class="form-control">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-block btn-success" name="create">Tambah</button>
                         </form>
@@ -90,23 +88,21 @@
 
                     <?php if(isset($_GET['edit'])): ?>
                         <form class="mt-2" action="" method="post">
-                            <div class="form-group">
-                                <label for="id_gudang">Id Gudang</label>
-                                <input id="id_gudang" name="id_gudang" type="text" class="form-control" value="<?= $_GET['edit']?>" disabled>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="jumlah">Jumlah</label>
+                                    <input id="jumlah" name="jumlah" type="text" class="form-control" value="<?= $_GET['jumlah']?>">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="kandungan_lemak">Kandungan Lemak</label>
+                                    <input id="kandungan_lemak" name="kandungan_lemak" type="text" class="form-control" value="<?= $_GET['kandungan_lemak']?>">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="kandungan_protein">Kandungan Protein</label>
+                                    <input id="kandungan_protein" name="kandungan_protein" type="text" class="form-control" value="<?= $_GET['kandungan_protein']?>">
+                                </div>
+                                <button type="submit" class="btn btn-block btn-success" name="update" value="<?= $_GET['edit']?>">Ubah</button>
                             </div>
-                            <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
-                                <input id="jumlah" name="jumlah" type="text" class="form-control" value="<?= $_GET['jumlah']?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="kandungan_lemak">Kandungan Lemak</label>
-                                <input id="kandungan_lemak" name="kandungan_lemak" type="text" class="form-control" value="<?= $_GET['kandungan_lemak']?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="kandungan_protein">Kandungan Protein</label>
-                                <input id="kandungan_protein" name="kandungan_protein" type="text" class="form-control" value="<?= $_GET['kandungan_protein']?>">
-                            </div>
-                            <button type="submit" class="btn btn-block btn-success" name="update" value="<?= $_GET['edit']?>">Ubah</button>
                         </form>
                     <?php endif?>
 
@@ -123,10 +119,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $result = mysqli_query($conn, "SELECT * FROM gudang"); ?>
+                                <?php $result = mysqli_query($conn, "SELECT * FROM gudang"); 
+                                $no = 1;    ?>
                                 <?php while ($data = mysqli_fetch_array($result)): ?>
                                     <tr>
-                                        <td><?= $data['id_gudang'] ?></td>
+                                        <td><?= $no++ ?></td>
                                         <td><?= $data['jumlah'] ?></td>
                                         <td><?= $data['kandungan_lemak'] ?></td>
                                         <td><?= $data['kandungan_protein'] ?></td>

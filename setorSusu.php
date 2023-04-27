@@ -2,16 +2,17 @@
     include 'sidebarnav.php';
     include_once 'config.php';
     ob_start();
+    $id = $_SESSION['id_petugas'];
 
     $redirect_path = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] ;
     if(isset($_POST['create'])) {
-        $id_setor = $conn->real_escape_string($_POST['id_setor']);
-        $id_petugas_setor = $conn->real_escape_string($_POST['id_petugas_setor']);
+        // $id_setor = $conn->real_escape_string($_POST['id_setor']);
+        $id_petugas_setor = $id;
         $id_mitra = $conn->real_escape_string($_POST['id_mitra']);
         $jumlah = $conn->real_escape_string($_POST['jumlah']);
         $date = $conn->real_escape_string($_POST['date']);
 
-        $sql = "INSERT INTO setor_susu (id_setor, id_petugas_setor , id_mitra , jumlah , date) VALUES ('$id_setor', '$id_petugas_setor', '$id_mitra', '$jumlah', '$date')";
+        $sql = "INSERT INTO setor_susu (id_setor, id_petugas_setor , id_mitra , jumlah , date) VALUES (null, '$id_petugas_setor', '$id_mitra', '$jumlah', '$date')";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -67,27 +68,37 @@
                         </div>
                     </div>
                     <!-- table  -->
-                    <?php if(isset($_GET['add'])): ?>
+                    <?php if(isset($_GET['add'])): 
+                        $dataPetugas = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM Petugas WHERE id_petugas =" .$id));
+                    ?>
                         <form class="mt-2" action="" method="post">
-                            <div class="form-group">
-                                <label for="id_setor">ID Setor</label>
-                                <input id="id_setor" name="id_setor" type="text" class="form-control">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="id_petugas_setor">Nama Petugas</label>
+                                    <input type="text" class="form-control" id="id_petugas_setor" placeholder=" <?= $dataPetugas['nama']?>" disabled>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="id_mitra">Mitra</label>
+                                    <select id="id_mitra" name="id_mitra" class="form-control">
+                                        <?php 
+                                            $data=mysqli_query($conn, "SELECT * FROM mitra");
+                                            while($dataMitra = mysqli_fetch_array($data)) { 
+                                            ?>
+                                                <option value="<?= $dataMitra['id_mitra']?>"> <?= $dataMitra['nama_mitra'] ?></option>
+
+                                            <?php 
+                                            };
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="id_petugas_setor">ID Petugas_Setor</label>
-                                <input id="id_petugas_setor" name="id_petugas_setor" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="id_mitra">Mitra</label>
-                                <input id="id_mitra" name="id_mitra" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
+                                <label for="jumlah">Jumlah Liter</label>
                                 <input id="jumlah" name="jumlah" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="date">Date</label>
-                                <input id="date" name="date" type="text" class="form-control">
+                                <input id="date" name="date" type="date" class="form-control">
                             </div>
                             <button type="submit" class="btn btn-block btn-success" name="create">Tambah</button>
                         </form>
@@ -124,28 +135,33 @@
                         <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>id_setor</th>
-                                    <th>id_petugas_setor</th>
-                                    <th>id_mitra</th>
-                                    <th>jumlah</th>
-                                    <th>date</th>
+                                    <th>No</th>
+                                    <th>Nama Petugas</th>
+                                    <th>Nama Mitra</th>
+                                    <th>Alamat Mitra</th>
+                                    <th>Jumlah Setor</th>
+                                    <th>Tanggal Setor</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $result = mysqli_query($conn, "SELECT * FROM setor_susu"); ?>
+                                <?php $result = mysqli_query($conn, "SELECT * FROM setor_susu 
+                                                                    JOIN petugas ON setor_susu.id_petugas_setor = petugas.id_petugas
+                                                                    JOIN mitra ON setor_susu.id_mitra = mitra.id_mitra"); 
+                                $no = 1;?>
                                 <?php while ($data = mysqli_fetch_array($result)): ?>
                                     <tr>
-                                        <td><?= $data['id_setor'] ?></td>
-                                        <td><?= $data['id_petugas_setor'] ?></td>
-                                        <td><?= $data['id_mitra'] ?></td>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $data['nama'] ?></td>
+                                        <td><?= $data['nama_mitra'] ?></td>
+                                        <td><?= $data['alamat'] ?></td>
                                         <td><?= $data['jumlah'] ?></td>
                                         <td><?= $data['date'] ?></td>
                                         <td class="d-flex gap-3">
-                                            <a class="btn btn-outline-primary" href="?edit=<?= $data['id_setor'] ?>&id_petugas_setor=<?= $data['id_petugas_setor']?>&id_mitra=<?= $data['id_mitra']?>&jumlah=<?= $data['jumlah']?>&date=<?= $data['date']?>">Ubah</a>
+                                            <a class="btn btn-warning text-white" href="?edit=<?= $data['id_setor'] ?>&id_petugas_setor=<?= $data['id_petugas_setor']?>&id_mitra=<?= $data['id_mitra']?>&jumlah=<?= $data['jumlah']?>&date=<?= $data['date']?>">Ubah</a>
 
                                             <form action="" method="post">
-                                                <button type="submit" class="btn btn-outline-danger" name="delete" value="<?= $data['id_setor'] ?>">Hapus</button>
+                                                <button type="submit" class="btn btn-danger text-white" name="delete" value="<?= $data['id_setor'] ?>">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
