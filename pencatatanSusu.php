@@ -4,7 +4,7 @@
 
     $tz = 'Asia/Jakarta';
     $dt = new DateTime("now", new DateTimeZone($tz));
-    $timestamp = $dt->format('Y-m-d G:i:s');
+    $timestamp = $dt->format('Y-m-d');
     
     //insert session
     $id = $_SESSION['id_petugas'];
@@ -14,6 +14,7 @@
     if(isset($_POST['create'])) {
         $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
         $id_petugas = $id;
+        $tanggal = $timestamp;
         $lemak = $conn->real_escape_string($_POST['lemak']);
         $protein = $conn->real_escape_string($_POST['protein']);
         $tLiter = $conn->real_escape_string($_POST['total_liter']);
@@ -21,7 +22,7 @@
         $hTotal = ($tLiter * $hLiter);
         // $datetime = $conn->real_escape_string($_POST['datetime']);
 
-        $sql = "INSERT INTO pengumpulan_susu (id_pengumpulan_susu, id_peternak, id_petugas_pencatatan, kandungan_lemak, kandungan_protein, jumlah_liter, harga_susu, harga_total) VALUES (NULL, '$id_peternak', '$id_petugas', '$lemak', '$protein', '$tLiter', '$hLiter', '$hTotal')";
+        $sql = "INSERT INTO pengumpulan_susu (id_pengumpulan_susu, id_peternak, id_petugas_pencatatan, tanggal_pengumpulan, kandungan_lemak, kandungan_protein, jumlah_liter, harga_susu, harga_total) VALUES (NULL, '$id_peternak', '$id_petugas','$tanggal', '$lemak', '$protein', '$tLiter', '$hLiter', '$hTotal')";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -132,6 +133,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Petugas</th>
+                                        <th>Tanggal</th>
                                         <th>Nama Peternak</th>
                                         <th>Lemak</th>
                                         <th>Jumlah</th>
@@ -148,6 +150,7 @@
                                             <tr>
                                                 <td><?=  $number++ ?></td>
                                                 <td><?= $data['nama'] ?></td>
+                                                <td><?= $data['tanggal_pengumpulan'] ?></td>
                                                 <td><?= $data['nama_pemilik']?></td>  
                                                 <td><?= $data['kandungan_lemak']?></td>    
                                                 <td><?= $data['jumlah_liter']?></td>    
