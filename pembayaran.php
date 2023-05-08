@@ -2,6 +2,9 @@
     include 'sidebarnav.php';
     include_once 'config.php';
 
+    $tz = 'Asia/Jakarta';
+    $dt = new DateTime("now", new DateTimeZone($tz));
+    $timestamp = $dt->format('Y-m-d');
     //insert session
     $id = $_SESSION['id_petugas'];
     ob_start();
@@ -12,6 +15,7 @@
         $id_petugas_transaksi = $id;
         $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
         $periode = $conn->real_escape_string($_POST['periode']);
+        $date_pay = $conn->real_escape_string($_POST['date_pay']);
 
         //logic total bayar
         $date_start = $conn->real_escape_string($_POST['date_start']);
@@ -19,9 +23,8 @@
         $sql_sum = "SELECT SUM(harga_total) as jumlah_bayar FROM pengumpulan_susu
         WHERE id_peternak = '$id_peternak' AND tanggal_pengumpulan between '$date_start' and '$date_end' ";
         $harga_total = mysqli_fetch_array(mysqli_query($conn, $sql_sum))['jumlah_bayar'];
-        echo $sql_sum; 
         
-        $sql = "INSERT INTO pembayaran (id_pembayaran, id_petugas_transaksi, id_peternak, periode, harga_total) VALUES (NULL, '$id_petugas_transaksi','$id_peternak','$periode', '$harga_total')";
+        $sql = "INSERT INTO pembayaran (id_pembayaran, id_petugas_transaksi, id_peternak, periode,tanggal_pembayaran, harga_total) VALUES (NULL, '$id_petugas_transaksi','$id_peternak','$periode', '$date_pay', '$harga_total')";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -29,26 +32,27 @@
         </script>
         <?php
     }  
-    
-    if (isset($_POST['update'])) {
-        $id_pengumpulan_susu = $conn->real_escape_string($_POST['update']);
-        $id_petugas_transaksi = $conn->real_escape_string($_POST['id_petugas_transaksi']);
-        $harga_total = $conn->real_escape_string($_POST['harga_total']);
+   
+    // belum kepikiran atau tidak soalnya berhubungan dengan uang
+    // if (isset($_POST['update'])) {
+    //     $id_pengumpulan_susu = $conn->real_escape_string($_POST['update']);
+    //     $id_petugas_transaksi = $conn->real_escape_string($_POST['id_petugas_transaksi']);
+    //     $harga_total = $conn->real_escape_string($_POST['harga_total']);
       
-        $sql = "UPDATE pembayaran SET  id_petugas_transaksi = '$id_petugas_transaksi', harga_total = '$harga_total' WHERE id_pengumpulan_susu = '$id_pengumpulan_susu'";
-        $conn->query($sql) or die(mysqli_error($conn));
-        ?>
-        <script>
-            window.location.assign("<?= $redirect_path?>")
-        </script>
-        <?php
-    }  
+    //     $sql = "UPDATE pembayaran SET  id_petugas_transaksi = '$id_petugas_transaksi', harga_total = '$harga_total' WHERE id_pengumpulan_susu = '$id_pengumpulan_susu'";
+    //     $conn->query($sql) or die(mysqli_error($conn));
+    //     ?>
+         <script>
+    //         window.location.assign("<?= $redirect_path?>")
+    //     </script>
+         <?php
+    // }  
     
     
     if (isset($_POST['delete'])) {
-        $id_pengumpulan_susu = $conn->real_escape_string($_POST['id_pengumpulan_susu']);
-        $id_pengumpulan_susu = $conn->real_escape_string($_POST['delete']);
-        $sql = "DELETE FROM pembayaran WHERE id_pengumpulan_susu = '$id_pengumpulan_susu'";
+        $id_pembayaran = $conn->real_escape_string($_POST['id_pembayaran']);
+        $id_pembayaran = $conn->real_escape_string($_POST['delete']);
+        $sql = "DELETE FROM pembayaran WHERE id_pembayaran = '$id_pembayaran'";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -105,7 +109,11 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
+                                    <label for="name">Tanggal & Waktu</label>
+                                    <input type="text" class="form-control" id="date_pay" name="date_pay" placeholder=" <?= $timestamp?>"disabled>
+                                </div>
+                                <div class="form-group col-md-1">
                                     <label for="periode">periode</label>
                                     <select id="periode" name="periode" type="number" class="form-control">
                                         <option value="1">1</option>
