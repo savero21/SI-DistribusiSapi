@@ -163,9 +163,9 @@ if (!isset($_SESSION['nama_roles'])) {
                                 href="#" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="peternak.php" aria-expanded="false">
+                                href="transaksiPeternak.php" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span
-                                class="hide-menu">Kelola Peternak</span></a>
+                                class="hide-menu">Lihat Transaksi</span></a>
                             </li>
                             <?php } ?>
                             
