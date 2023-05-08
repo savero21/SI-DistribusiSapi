@@ -1,5 +1,5 @@
 <?php 
-    include 'sidebarnavPeternak.php';
+    include 'sidebarnav.php';
     include_once 'config.php';
  
     if (!isset($_SESSION['id_peternak'])) {
@@ -27,7 +27,7 @@
                                     <th>id peternak</th>
                                     <th>id petugas pencatatan</th>
                                     <th>kandungan lemak</th>
-                                    <th>jumlah</th>
+                                    <th>Jumlah (liter)</th>
                                     <th>harga susu</th>
                                 </tr>
                             </thead>
@@ -41,7 +41,7 @@
                                         echo "<td>".$data['id_peternak']."</td>";
                                         echo "<td>".$data['id_petugas_pencatatan']."</td>";    
                                         echo "<td>".$data['kandungan_lemak']."</td>";    
-                                        echo "<td>".$data['jumlah']."</td>";    
+                                        echo "<td>".$data['jumlah_liter']."</td>";    
                                         echo "<td>".$data['harga_susu']."</td>";    
                                         // echo "<td><a href='edit.php?id=$data[id]'>Edit</a> | <a href='delete.php?id=$data[id]'>Delete</a></td></tr>";        
                                     }

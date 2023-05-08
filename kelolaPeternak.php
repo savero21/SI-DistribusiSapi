@@ -29,9 +29,10 @@
         $nama_peternakan = $conn->real_escape_string($_POST['nama_peternakan']);
         $alamat = $conn->real_escape_string($_POST['alamat']);
         $no_hp = $conn->real_escape_string($_POST['no_hp']);
+        $username = $conn->real_escape_string($_POST['username']);
         $norek = $conn->real_escape_string($_POST['norek']);
 
-        $sql = "UPDATE peternak SET nama_pemilik = '$nama_pemilik', nama_peternakan = '$nama_peternakan',  no_hp = '$no_hp', norek = '$norek' WHERE id_peternak = '$id_peternak'";
+        $sql = "UPDATE peternak SET nama_pemilik = '$nama_pemilik', nama_peternakan = '$nama_peternakan',  no_hp = '$no_hp', username = '$username', password = '$password',  norek = '$norek' WHERE id_peternak = '$id_peternak'";
         $conn->query($sql) or die(mysqli_error($conn));
         ?>
         <script>
@@ -74,10 +75,6 @@
                     <?php if(isset($_GET['add'])): ?>
                         <form class="mt-2" action="" method="post">
                             <div class="form-group">
-                                <label for="id_peternak">ID Peternak</label>
-                                <input id="id_peternak" name="id_peternak" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label for="nama_pemilik">Nama Pemilik</label>
                                 <input id="nama_pemilik" name="nama_pemilik" type="text" class="form-control">
                             </div>
@@ -110,27 +107,23 @@
                         <form class="mt-2" action="" method="post">
                         <div class="form-group">
                                 <label for="id_peternak">ID Peternak</label>
-                                <input id="id_peternak" name="id_peternak" type="text" class="form-control" >
+                                <input id="id_peternak" name="id_peternak" type="text" class="form-control" value="<?= $_GET['edit']?>" disabled> 
                             </div>
                             <div class="form-group">
                                 <label for="nama_pemilik">Nama Pemilik</label>
-                                <input id="nama_pemilik" name="nama_pemilik" type="text" class="form-control">
+                                <input id="nama_pemilik" name="nama_pemilik" type="text" class="form-control" value="<?= $_GET['nama_pemilik']?>">
                             </div>
                             <div class="form-group">
                                 <label for="nama_peternakan">Nama Peternakan</label>
-                                <input id="nama_peternakan" name="nama_peternakan" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <input id="alamat" name="alamat" type="text" class="form-control">
+                                <input id="nama_peternakan" name="nama_peternakan" type="text" class="form-control" value="<?= $_GET['nama_peternakan']?>">
                             </div>
                             <div class="form-group">
                                 <label for="no_hp">Nomor HP</label>
-                                <input id="no_hp" name="no_hp" type="text" class="form-control">
+                                <input id="no_hp" name="no_hp" type="text" class="form-control" value="<?= $_GET['no_hp']?>">
                             </div>
                             <div class="form-group">
                                 <label for="norek">Norek</label>
-                                <input id="norek" name="norek" type="text" class="form-control">
+                                <input id="norek" name="norek" type="text" class="form-control" value="<?= $_GET['norek']?>">
                             </div>
                             <button type="submit" class="btn btn-block btn-success" name="update" value="<?= $_GET['edit']?>">Ubah</button>
                         </form>
@@ -163,7 +156,9 @@
                                         <td><?= $data['password'] ?></td>
                                         <td><?= $data['norek'] ?></td>
                                         <td class="d-flex gap-3">
-                                            <a class="btn bg-warning text-white" href="?edit= <?= $data['id_peternak'] ?>&nama_pemilik=<?= $data['nama_pemilik']?>&nama_peternakan=<?= $data['nama_peternakan']?>&no_hp=<?= $data['no_hp']?>&norek=<?= $data['norek']?>">Ubah</a>
+                                            <a class="btn bg-warning text-white" href="?edit= <?= $data['id_peternak']?>&nama_pemilik=<?= 
+                                            $data['nama_pemilik']?>&nama_peternakan=<?= $data['nama_peternakan']?>&no_hp=<?= $data['no_hp']?>&username=<?= 
+                                            $data['username']?>&password=<?=$data['password']?>&norek=<?= $data['norek']?>">Ubah</a>
 
                                             <form action="" method="post">
                                                 <button type="submit" class="btn bg-danger text-white" name="delete" value="<?= $data['id_peternak'] ?>">Hapus</button>
