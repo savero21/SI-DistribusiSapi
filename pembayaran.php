@@ -15,7 +15,7 @@
         $id_petugas_transaksi = $id;
         $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
         $periode = $conn->real_escape_string($_POST['periode']);
-        $date_pay = $conn->real_escape_string($_POST['date_pay']);
+        $date_pay = $timestamp;
 
         //logic total bayar
         $date_start = $conn->real_escape_string($_POST['date_start']);
@@ -34,19 +34,20 @@
     }  
    
     // belum kepikiran atau tidak soalnya berhubungan dengan uang
-    // if (isset($_POST['update'])) {
-    //     $id_pengumpulan_susu = $conn->real_escape_string($_POST['update']);
-    //     $id_petugas_transaksi = $conn->real_escape_string($_POST['id_petugas_transaksi']);
-    //     $harga_total = $conn->real_escape_string($_POST['harga_total']);
+     if (isset($_POST['update'])) {
+         $id_pembayaran = $conn->real_escape_string($_POST['update']);
+         $id_petugas_transaksi = $id;
+            $id_peternak = $conn->real_escape_string($_POST['id_peternak']);
+            $periode = $conn->real_escape_string($_POST['periode']);
       
-    //     $sql = "UPDATE pembayaran SET  id_petugas_transaksi = '$id_petugas_transaksi', harga_total = '$harga_total' WHERE id_pengumpulan_susu = '$id_pengumpulan_susu'";
-    //     $conn->query($sql) or die(mysqli_error($conn));
-    //     ?>
+         $sql = "UPDATE pembayaran SET  id_petugas_transaksi = '$id_petugas_transaksi', harga_total = '$harga_total' WHERE id_pengumpulan_susu = '$id_pengumpulan_susu'";
+         $conn->query($sql) or die(mysqli_error($conn));
+         ?>
          <script>
-    //         window.location.assign("<?= $redirect_path?>")
-    //     </script>
+             window.location.assign("<?= $redirect_path?>")
+         </script>
          <?php
-    // }  
+     }  
     
     
     if (isset($_POST['delete'])) {
@@ -143,22 +144,62 @@
                     <?php endif?>
 
                     <?php if(isset($_GET['edit'])): ?>
+                        <?php 
+                            //get session
+                             $dataPetugas = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM Petugas WHERE id_petugas =" .$id));
+                            ?>
                         <form class="mt-2" action="" method="post">
-                        <div class="form-group">
-                                <label for="id_pengumpulan_susu">id_pengumpulan_susu</label>
-                                <input id="id_pengumpulan_susu" name="id_pengumpulan_susu" type="text" class="form-control" value="<?= $_GET['edit']?>"disabled>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Nama Petugas</label>
+                                    <input type="text" class="form-control" id="id_petugas" placeholder=" <?= $dataPetugas['nama']?>" disabled>
+                                </div>
+                                <div class="form-group col-md-6">
+                                <label for="name">nama peternak</label>
+                                <select id="id_peternak" name="id_peternak" class="form-control">
+                                    <?php 
+                                        $data=mysqli_query($conn, "SELECT * FROM Peternak");
+                                        while($dataPeternak = mysqli_fetch_array($data)) { 
+                                        ?>
+                                            <option value="<?= $dataPeternak['id_peternak']?>"> <?= $dataPeternak['nama_pemilik'] ?></option>
+    
+                                        <?php 
+                                        };
+                                    ?>
+                                </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="id_petugas_transaksi">id_petugas_transaksi</label>
-                                <input id="id_petugas_transaksi" name="id_petugas_transaksi" type="text" class="form-control" value="<?= $_GET['id_petugas_transaksi']?>">
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="name">Tanggal & Waktu</label>
+                                    <input type="text" class="form-control" id="date_pay" name="date_pay" placeholder=" <?= $timestamp?>"disabled>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <label for="periode">periode</label>
+                                    <select id="periode" name="periode" type="number" class="form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="date_start">tanggal awal</label>
+                                    <input id="date_start" name="date_start" type="date" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="date_end">tanggal akhir</label>
+                                    <input id="date_end" name="date_end" type="date" class="form-control">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="harga_total">harga_total</label>
-                                <input id="harga_total" name="harga_total" type="text" class="form-control" value="<?= $_GET['harga_total']?>">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="sum_total">Total yang harus dibayarkan</label>
+                                    <input id="sum_total" name="sum_total" type="text" class="form-control" placeholder="Hasil pembayaran akan keluar setelah di submit" disabled>
+                                </div>
                             </div>
-
-                            <button type="submit" class="btn btn-block btn-success" name="update" value="<?= $_GET['edit']?>">Ubah</button>
-                        </form>
+                          
+                            <button type="submit" class="btn btn-block btn-success" name="create">Tambah</button>
+                        </form> 
                     <?php endif?>
 
                     <?php if(!isset($_GET['add']) && !isset($_GET['edit'])): ?>
