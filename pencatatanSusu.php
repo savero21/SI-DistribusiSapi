@@ -59,7 +59,7 @@
                     <!-- table  -->
                     <div class="mt-4 align-items-right">
                         <div class="text-end upgrade-btn">
-                            <?php if(!isset($_GET['add'])): ?>
+                            <?php if(!isset($_GET['add']) && !isset($_GET['edit'])): ?>
                                 <a href="?add=true"
                                 class="btn btn-success d-none d-md-inline-block text-white">Add Data Baru <i class="fa-solid fa-plus"></i></a>
                             <?php endif?>

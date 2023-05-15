@@ -23,24 +23,31 @@
                         <table id="example" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>id pengumpulan susu</th>
-                                    <th>id peternak</th>
-                                    <th>id petugas pencatatan</th>
-                                    <th>kandungan lemak</th>
-                                    <th>Jumlah (liter)</th>
-                                    <th>harga susu</th>
+                                    <th>No</th>
+                                    <th>Nama Peternak</th>
+                                    <th>Nama Pencatatan</th>
+                                    <th>Tanggal Pengumpulan</th>
+                                    <th>Lemak</th>
+                                    <th>Protein</th>
+                                    <th>Harga Susu</th>
+                                    <th>Harga Total</th>
+                                    <!-- <th>Protein</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu WHERE id_peternak='$_SESSION[id_peternak]'");
+                                    $result = mysqli_query($conn, "SELECT * FROM pengumpulan_susu JOIN peternak ON pengumpulan_susu.id_peternak = peternak.id_peternak JOIN petugas ON pengumpulan_susu.id_petugas_pencatatan = petugas.id_petugas WHERE pengumpulan_susu.id_peternak='$_SESSION[id_peternak]'");
                                     
+                                    $nomor = 1;
+
                                     while($data = mysqli_fetch_array($result)) {         
                                         echo "<tr>";
-                                        echo "<td>".$data['id_pengumpulan_susu']."</td>";
-                                        echo "<td>".$data['id_peternak']."</td>";
-                                        echo "<td>".$data['id_petugas_pencatatan']."</td>";    
+                                        echo "<td>".$nomor++."</td>";
+                                        echo "<td>".$data['nama_pemilik']."</td>";
+                                        echo "<td>".$data['nama']."</td>";
+                                        echo "<td>".$data['tanggal_pengumpulan']."</td>";    
                                         echo "<td>".$data['kandungan_lemak']."</td>";    
+                                        echo "<td>".$data['kandungan_protein']."</td>";    
                                         echo "<td>".$data['jumlah_liter']."</td>";    
                                         echo "<td>".$data['harga_susu']."</td>";    
                                         // echo "<td><a href='edit.php?id=$data[id]'>Edit</a> | <a href='delete.php?id=$data[id]'>Delete</a></td></tr>";        
